@@ -34,9 +34,9 @@ function App() {
             <Route path='/addService'>
               <AddService></AddService>
             </Route>
-            <Route path='/manageServices'>
+            <PrivateRoute path='/manageServices'>
               <ManageServices></ManageServices>
-            </Route>
+            </PrivateRoute>
             <Route path='/services/updateService/:id'>
               <UpdateService></UpdateService>
             </Route>
