@@ -8,7 +8,7 @@ const UpdateService = () => {
 
 
   useEffect(() => {
-    fetch(`http://localhost:5000/services/${id}`)
+    fetch(`https://afternoon-citadel-30543.herokuapp.com/services/${id}`)
       .then((res) => res.json())
       .then((data) => setService(data))
   }, [id]);
@@ -65,7 +65,7 @@ const UpdateService = () => {
   const handleUpdate = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:5000/services/${id}`, {
+    fetch(`https://afternoon-citadel-30543.herokuapp.com/services/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

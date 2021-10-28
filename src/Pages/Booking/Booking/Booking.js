@@ -9,7 +9,7 @@ const Booking = () => {
   const [count, setCount] = useState(1);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/services/${serviceId}`)
+    fetch(`https://afternoon-citadel-30543.herokuapp.com/services/${serviceId}`)
       .then((res) => res.json())
       .then((data) => setService(data));
   }, [serviceId]);

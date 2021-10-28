@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 const AddService = () => {
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
-      axios.post('http://localhost:5000/services', data)
+      axios.post('https://afternoon-citadel-30543.herokuapp.com/services', data)
       .then(res => {
           if(res.data.insertedId){
               alert('Service added successfully');
