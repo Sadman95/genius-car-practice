@@ -10,6 +10,7 @@ import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
 import AddService from './Pages/AddService/AddService';
 import ManageServices from './Pages/ManageServices/ManageServices';
 import UpdateService from './Pages/UpdateService/UpdateService';
+import Orders from './Pages/Orders/Orders';
 
 
 function App() {
@@ -33,6 +34,9 @@ function App() {
             </PrivateRoute>
             <Route path='/addService'>
               <AddService></AddService>
+            </Route>
+            <Route path='/myOrders'>
+              <Orders></Orders>
             </Route>
             <PrivateRoute path='/manageServices'>
               <ManageServices></ManageServices>

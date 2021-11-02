@@ -6,7 +6,7 @@ const Service = ({ service }) => {
     // const {service} = props;
     const { _id, name, price, description, img } = service;
     return (
-        <div className="service pb-3">
+        <div className="service pb-3 overflow-hidden">
             <img src={img} alt="" />
             <h3>{name}</h3>
             <h5>Price: {price}</h5>

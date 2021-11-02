@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 // import './Booking.css'
 
 const Booking = () => {
   const { serviceId } = useParams();
   const [service, setService] = useState({});
   const [count, setCount] = useState(1);
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     fetch(`https://afternoon-citadel-30543.herokuapp.com/services/${serviceId}`)
@@ -22,6 +25,35 @@ const Booking = () => {
   const handleRemove = () =>{
       count > 1 && setCount(count - 1);
   }
+
+  //add to cart:
+  const addToCart = () =>{
+    const item = {
+      name: service.name,
+      price: service.price,
+      quantity: count
+    }
+    fetch('http://localhost:5000/user/cart', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(item) 
+    })
+    .then(res => {
+      if(res.status){
+        Swal.fire(
+          'Well Done!',
+          'Service added to cart!',
+          'success'
+        )
+      }
+    })
+    .finally(() => setToggle(true));
+  }
+
+
+
 
   return (
     <Row className='p-4'>
@@ -39,12 +71,19 @@ const Booking = () => {
               <div className="card-body text-start">
                 <h5 className="card-title">{service.name}</h5>
                 <p className="card-text">{service.description}</p>
-                <p className="card-text">
+                <div className="card-text">
                   <h3 className="text-muted">${service.price * count}</h3>
                   <Button onClick={handleAdd} variant="primary">+</Button>
                   <span className='mx-2'>{count}</span>
                   <Button onClick={handleRemove} variant="danger">-</Button>
-                </p>
+                </div>
+                {
+                  !toggle ? <button onClick={addToCart} className="mt-2 btn btn-success text-light">Add to cart</button> :
+                  <Link to='/myOrders'>
+                    <button className="mt-2 btn btn-secondary text-light">Check your orders</button>
+                  </Link>
+                }
+                
               </div>
             </div>
           </div>

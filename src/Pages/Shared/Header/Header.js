@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, Container, Nav, Navbar } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Button, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Link, NavLink } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import { HashLink } from 'react-router-hash-link';
 
@@ -11,8 +11,8 @@ const Header = () => {
             <Navbar bg="dark" variant="dark" sticky="top" collapseOnSelect expand="lg" >
                 <Container>
                     <Navbar.Brand href="#home">Genius</Navbar.Brand>
-                    <Navbar.Toggle />
-                    <Navbar.Collapse className="justify-content-end">
+                    <Navbar.Toggle aria-controls="navbar-dark-example"/>
+                    <Navbar.Collapse id="navbar-dark-example" className="justify-content-end">
                         <Nav.Link as={HashLink} to="/home#home">Home</Nav.Link>
                         <Nav.Link as={HashLink} to="/home#services">Services</Nav.Link>
                         <Nav.Link as={HashLink} to="/manageServices">Manage Service</Nav.Link>
@@ -20,9 +20,19 @@ const Header = () => {
                         {user?.email ?
                             <Button onClick={logOut} variant="light">Logout</Button> :
                             <Nav.Link as={Link} to="/login">Login</Nav.Link>}
-                        <Navbar.Text>
+                        {
+                            user.email && <>
+                                <Navbar.Text>
                             Signed in as: <a href="#login">{user?.displayName}</a>
                         </Navbar.Text>
+                        <NavDropdown
+          id="nav-dropdown-dark-example"
+          menuVariant="dark"
+        >
+          <NavDropdown.Item as={NavLink} to="/myOrders">My Orders</NavDropdown.Item>
+        </NavDropdown>
+                            </>
+                        }
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
