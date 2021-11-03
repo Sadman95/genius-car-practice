@@ -34,7 +34,7 @@ const LoadOrders = () => {
 
     return (
         <>
-        <Row>
+        <Row className='p-4 mx-auto'>
             <Row className='text-primary'>
                     <Col><h3>Name</h3></Col>
                     <Col><h3>Quantity</h3></Col>
@@ -42,7 +42,7 @@ const LoadOrders = () => {
                     <Col><h3>Action</h3></Col>
                 </Row>
             {
-                orders.map(order => <Row key={order._id}>
+                orders.map(order => <Row className='border border-primary p-4 rounded-1 mb-2' key={order._id}>
                     <Col>
                         <h4>{order.name}</h4>
                     </Col>
