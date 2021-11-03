@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 
 const LoadOrders = () => {
     const [orders, setOrders] = useState([]);
+    const [isConfirm, setIsConfirm] = useState(false);
 
     useEffect(() =>{
         fetch('http://localhost:5000/user/cart')
@@ -24,9 +25,15 @@ const LoadOrders = () => {
         const restOrders = orders.filter(order => order._id !== id);
         setOrders(restOrders);
     })
+  };
+
+  //confirm order:
+  const handleConfirm = () =>{
+    setIsConfirm(true);
   }
 
     return (
+        <>
         <Row>
             <Row className='text-primary'>
                     <Col><h3>Name</h3></Col>
@@ -51,7 +58,9 @@ const LoadOrders = () => {
                 </Row>)
             }
         </Row>
+        <button onClick={handleConfirm} className={`mt-4 btn btn-${isConfirm ? 'warning' : 'success'} text-${isConfirm ? 'dark' : 'light'}`}>{isConfirm ? 'Pending...' : 'Confirm'}</button>
 
+</>
     );
 };
 
